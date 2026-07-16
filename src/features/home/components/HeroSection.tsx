@@ -1,6 +1,7 @@
-import { Button } from "@/components/ui/Button";
-import { Container } from "@/components/ui/Container";
-import { HeroFloatingElements } from "./HeroFloatingElements";
+import Link from 'next/link'
+import { Button } from '@/components/ui/Button'
+import { Container } from '@/components/ui/Container'
+import { HeroFloatingElements } from './HeroFloatingElements'
 
 export function HeroSection() {
   return (
@@ -20,7 +21,7 @@ export function HeroSection() {
             </div>
 
             <h1 className="text-4xl font-bold leading-tight tracking-tight text-zinc-100 sm:text-5xl lg:text-6xl">
-              Os clássicos da infância reunidos em um só lugar.{" "}
+              Os clássicos da infância reunidos em um só lugar.{' '}
               <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">
                 Escolha um jogo e comece a jogar
               </span>
@@ -33,32 +34,18 @@ export function HeroSection() {
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <Button size="xl">
-                <span className="text-xl">🎮</span>
-                Jogar Agora
-              </Button>
-              <Button size="xl" variant="secondary">
-                Explorar Jogos
-              </Button>
+              <Link href="/#jogos">
+                <Button size="xl">
+                  <span className="text-xl">🎮</span>
+                  Jogar Agora
+                </Button>
+              </Link>
+              <Link href="/games">
+                <Button size="xl" variant="secondary">
+                  Explorar Jogos
+                </Button>
+              </Link>
             </div>
-
-            {/* <div className="mt-12 flex items-center gap-8 text-sm text-zinc-500">
-              <div className="flex items-center gap-2">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3].map((i) => (
-                    <div
-                      key={i}
-                      className="h-8 w-8 rounded-full border-2 border-zinc-800 bg-gradient-to-br from-zinc-700 to-zinc-600"
-                    />
-                  ))}
-                </div>
-                <span>10k+ jogadores</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="text-yellow-400">★</span>
-                <span>4.8 (2k avaliações)</span>
-              </div>
-            </div> */}
           </div>
 
           <div className="relative hidden lg:block">
@@ -67,5 +54,5 @@ export function HeroSection() {
         </div>
       </Container>
     </section>
-  );
+  )
 }

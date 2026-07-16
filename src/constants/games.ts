@@ -89,6 +89,52 @@ export const GAMES: Game[] = [
     gradient: 'from-sky-500 to-indigo-600',
     featured: true,
   },
+  {
+    id: 'flappy-bird',
+    title: 'Flappy Bird',
+    slug: 'flappy-bird',
+    description: 'Toque para voar e desvie dos canos.',
+    categoryId: 'reflexo',
+    difficulty: 'Hard',
+    playTime: '5 min',
+    gradient: 'from-sky-400 to-blue-500',
+    featured: false,
+  },
+  {
+    id: 'dino-run',
+    title: 'Dino Run',
+    slug: 'dino-run',
+    description: 'Corra sem parar e desvie dos obstáculos.',
+    categoryId: 'arcade',
+    difficulty: 'Medium',
+    playTime: '10 min',
+    gradient: 'from-stone-500 to-zinc-600',
+    featured: false,
+  },
+  {
+    id: 'sudoku',
+    title: 'Sudoku',
+    slug: 'sudoku',
+    description: 'Preencha a grade com números sem repetir.',
+    categoryId: 'puzzle',
+    difficulty: 'Medium',
+    playTime: '20 min',
+    gradient: 'from-indigo-500 to-violet-600',
+    featured: false,
+  },
+  {
+    id: 'xadrez',
+    title: 'Xadrez',
+    slug: 'xadrez',
+    description: 'O clássico jogo de estratégia milenar.',
+    categoryId: 'estrategia',
+    difficulty: 'Hard',
+    playTime: '30 min',
+    gradient: 'from-neutral-600 to-zinc-700',
+    featured: false,
+  },
 ]
 
 export const FEATURED_GAMES = GAMES.filter((game) => game.featured)
+
+export const GAMES_PER_PAGE = 8

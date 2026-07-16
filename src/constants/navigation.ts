@@ -1,13 +1,6 @@
-import type { NavItem, SocialLink } from '@/types/navigation'
-
-export const NAV_ITEMS: NavItem[] = [
-  { label: 'Jogos', href: '/games' },
-  { label: 'Categorias', href: '/categories' },
-  { label: 'Sobre', href: '/about' },
-]
+import type { SocialLink } from '@/types/navigation'
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  { label: 'Twitter', href: '#', icon: 'twitter' },
-  { label: 'Discord', href: '#', icon: 'discord' },
-  { label: 'GitHub', href: '#', icon: 'github' },
+  { label: 'GitHub', href: 'https://github.com/fridsonfirmino/games-hub', icon: 'github' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/fridsonfirmino', icon: 'linkedin' },
 ]

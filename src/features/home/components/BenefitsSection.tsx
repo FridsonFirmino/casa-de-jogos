@@ -44,7 +44,7 @@ const BENEFITS = [
 
 export function BenefitsSection() {
   return (
-    <section className="py-24">
+    <section id="por-que-usar" className="scroll-mt-24 py-24">
       <Container>
         <SectionTitle
           title="Por que jogar na Casa de Jogos?"

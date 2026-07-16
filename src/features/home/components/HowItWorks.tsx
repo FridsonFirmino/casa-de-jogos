@@ -22,7 +22,7 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section className="py-24">
+    <section id="como-funciona" className="scroll-mt-24 py-24">
       <Container>
         <SectionTitle
           title="Como Funciona"
