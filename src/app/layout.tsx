@@ -1,6 +1,6 @@
+import { Navbar } from "@/components/layout/Navbar";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Navbar } from "@/components/layout/Navbar";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Games Hub - Jogue centenas de jogos gratuitos no navegador",
+  title: "Casa de Jogos - Os clássicos da infância reunidos em um só lugar.",
   description:
     "Centenas de jogos gratuitos para jogar diretamente no navegador. Sem downloads, sem cadastro, sem complicação. Escolha um jogo e comece a jogar.",
   keywords: [
@@ -24,17 +24,18 @@ export const metadata: Metadata = {
     "jogos no navegador",
     "jogos sem download",
     "jogos arcade",
+    "jogos casa",
     "jogos clássicos",
   ],
   openGraph: {
-    title: "Games Hub - Jogue centenas de jogos gratuitos no navegador",
+    title: "Casa de Jogos - Os clássicos da infância reunidos em um só lugar.",
     description:
       "Centenas de jogos gratuitos para jogar diretamente no navegador. Sem downloads, sem cadastro.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Games Hub - Jogue centenas de jogos gratuitos no navegador",
+    title: "Casa de Jogos - Os clássicos da infância reunidos em um só lugar.",
     description:
       "Centenas de jogos gratuitos para jogar diretamente no navegador. Sem downloads, sem cadastro.",
   },
