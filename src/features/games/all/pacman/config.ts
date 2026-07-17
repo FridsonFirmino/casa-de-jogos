@@ -1,0 +1,26 @@
+import type { GameConfig } from '@/types/game'
+
+export const config: GameConfig = {
+  id: 'pacman',
+  slug: 'pacman',
+  title: 'Pac-Man',
+  description: 'Coma todos os pontos e fuja dos fantasmas.',
+  shortDescription: 'Coma pontos e fuja dos fantasmas.',
+  thumbnail: 'https://picsum.photos/id/60/400/300',
+  cover: 'https://picsum.photos/seed/pacman-cover/800/600',
+  categoryId: 'classicos',
+  category: 'Clássicos',
+  difficulty: 'Medium',
+  players: '1',
+  averagePlayTime: '15 min',
+  averagePlayTimeMinutes: 15,
+  tags: ["Clássico", "Arcade"],
+  featured: true,
+  popular: true,
+  isNew: false,
+  status: 'published',
+  version: '1.0.0',
+  rating: 4.8,
+  gradient: 'from-yellow-500 to-amber-600',
+  releaseDate: '2024-05-01',
+}

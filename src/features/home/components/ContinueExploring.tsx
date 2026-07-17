@@ -1,7 +1,7 @@
 import { Container } from '@/components/ui/Container'
 import { SectionTitle } from '@/components/ui/SectionTitle'
-import { GAMES } from '@/constants/games'
-import { GameCard } from './GameCard'
+import { registry } from '@/registry/games'
+import { GameCard } from '@/features/games/components/GameCard'
 
 export function ContinueExploring() {
   return (
@@ -18,9 +18,9 @@ export function ContinueExploring() {
       >
         <div className="flex shrink-0 w-[calc(100vw-theme(spacing.8)-20rem)] sm:w-8 lg:w-16" />
 
-        {GAMES.map((game) => (
-          <div key={game.id} className="min-w-[260px] max-w-[300px] shrink-0">
-            <GameCard game={game} />
+        {registry.map((entry) => (
+          <div key={entry.config.id} className="min-w-[260px] max-w-[300px] shrink-0">
+            <GameCard game={entry.config} />
           </div>
         ))}
 
