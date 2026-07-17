@@ -1,0 +1,26 @@
+import type { GameConfig } from '@/types/game'
+
+export const config: GameConfig = {
+  id: 'color-match',
+  slug: 'color-match',
+  title: 'Color Match',
+  description: 'Combine as cores antes que o tempo acabe.',
+  shortDescription: 'Combine cores contra o tempo.',
+  thumbnail: 'https://picsum.photos/id/300/400/300',
+  cover: 'https://picsum.photos/seed/color-match-cover/800/600',
+  categoryId: 'reflexo',
+  category: 'Reflexo',
+  difficulty: 'Easy',
+  players: '1',
+  averagePlayTime: '5 min',
+  averagePlayTimeMinutes: 5,
+  tags: ["Casual", "Reflexo"],
+  featured: false,
+  popular: false,
+  isNew: true,
+  status: 'published',
+  version: '1.0.0',
+  rating: 3.9,
+  gradient: 'from-fuchsia-500 to-purple-600',
+  releaseDate: '2025-02-14',
+}

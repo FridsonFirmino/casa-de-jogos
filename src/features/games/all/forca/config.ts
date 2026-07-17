@@ -1,0 +1,26 @@
+import type { GameConfig } from '@/types/game'
+
+export const config: GameConfig = {
+  id: 'forca',
+  slug: 'forca',
+  title: 'Jogo da Forca',
+  description: 'Descubra a palavra secreta antes de ser enforcado.',
+  shortDescription: 'Descubra a palavra secreta.',
+  thumbnail: 'https://picsum.photos/id/160/400/300',
+  cover: 'https://picsum.photos/seed/forca-cover/800/600',
+  categoryId: 'sorte',
+  category: 'Sorte',
+  difficulty: 'Easy',
+  players: '1-2',
+  averagePlayTime: '10 min',
+  averagePlayTimeMinutes: 10,
+  tags: ["Casual", "Palavras"],
+  featured: false,
+  popular: false,
+  isNew: false,
+  status: 'published',
+  version: '1.0.0',
+  rating: 4.0,
+  gradient: 'from-teal-500 to-emerald-600',
+  releaseDate: '2024-05-15',
+}

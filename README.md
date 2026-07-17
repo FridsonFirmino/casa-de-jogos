@@ -29,6 +29,10 @@ Feature-Based Architecture organized for scalability. Each game lives as an inde
 ```
 src/
 ├── app/                    # Next.js App Router pages
+├── registry/               # Central game registry (single source of truth)
+│   ├── games.ts            #   - Game catalog import & export
+│   └── categories.ts       #   - Auto-generated categories from registry
+├── game-template/          # Template for creating new games
 ├── components/
 │   ├── ui/                 # Shared primitives (Button, Container, Badge...)
 │   ├── layout/             # Navbar, Footer
@@ -36,10 +40,16 @@ src/
 ├── features/               # Feature modules
 │   ├── home/               # Homepage sections
 │   ├── games/              # Game catalog, filters, game cards
-│   ├── categories/         # Category browsing
-│   └── search/             # Global search
+│   │   ├── components/     #   - Shared game UI components
+│   │   ├── hooks/          #   - Game-related hooks
+│   │   └── all/            #   - All individual games
+│   │       ├── snake/      #   - Individual game module
+│   │       ├── pong/       #   - Individual game module
+│   │       ├── memory/     #   - Individual game module
+│   │       └── ...         #   - Each game is self-contained
+│   └── categories/         # Category browsing
 ├── hooks/                  # Shared custom hooks
-├── constants/              # Constants (games, categories, routes...)
+├── constants/              # Constants (routes, navigation...)
 ├── types/                  # TypeScript interfaces
 ├── utils/                  # Utility functions
 ├── lib/                    # Library configurations
@@ -48,16 +58,21 @@ src/
 └── styles/                 # Global styles
 ```
 
-### Per-Feature Structure
+### Per-Game Structure
+
+Every game follows an identical structure for consistency:
 
 ```
-feature/
-├── components/     # Feature-specific components
-├── hooks/          # Feature-specific hooks
-├── types/          # Feature-specific types
-├── constants/      # Feature-specific constants
-├── utils/          # Feature-specific utilities
-└── index.ts        # Public API
+features/games/all/<game-name>/
+├── assets/          # Game-specific images, sounds
+├── components/      # Game-specific components
+├── constants/       # Game-specific constants
+├── engine/          # Game logic/engine
+├── hooks/           # Game-specific hooks
+├── utils/           # Game-specific utilities
+├── Game.tsx         # Main game component (default export)
+├── config.ts        # All metadata lives here
+└── index.ts         # Public API (exports config + component)
 ```
 
 ---
@@ -105,52 +120,71 @@ npx tsc --noEmit
 
 ## Adding a New Game
 
-The architecture is designed so that adding a new game requires **zero structural changes**. Follow these three steps:
+Adding a new game requires **zero structural changes**. The entire app consumes the game registry — no component, page, or hook needs editing.
 
-### 1. Create the game feature
+### Step-by-step
 
-```
-src/features/games/<game-name>/
-├── components/
-├── hooks/
-├── types/
-├── constants/
-└── index.ts
+#### 1. Copy the template
+
+```bash
+cp -r src/game-template src/features/games/all/my-game
 ```
 
-All game-specific logic, components, and state live inside this folder.
+#### 2. Configure metadata
 
-### 2. Register in the catalog
-
-Add an entry to `src/constants/games.ts`:
+Edit `src/features/games/all/my-game/config.ts`:
 
 ```ts
-{
+export const config: GameConfig = {
   id: 'my-game',
-  title: 'My Game',
   slug: 'my-game',
-  description: 'A fun new game.',
+  title: 'My Game',
+  description: 'A fun new game description.',
+  shortDescription: 'A fun new game.',
+  thumbnail: 'https://picsum.photos/id/42/400/300',
+  cover: 'https://picsum.photos/id/42/800/600',
   categoryId: 'arcade',
+  category: 'Arcade',
   difficulty: 'Medium',
-  playTime: '10 min',
-  playTimeMinutes: 10,
-  gradient: 'from-indigo-500 to-violet-600',
-  featured: true,
-  rating: 4.5,
   players: '1',
+  averagePlayTime: '10 min',
+  averagePlayTimeMinutes: 10,
   tags: ['Arcade', 'Novo'],
-  new: true,
-  popular: false,
+  featured: true,
+  popular: true,
+  isNew: true,
+  status: 'published',
+  version: '1.0.0',
+  rating: 4.5,
+  gradient: 'from-indigo-500 to-violet-600',
   releaseDate: '2025-01-01',
-  urlPhoto: 'https://picsum.photos/id/42/800/600',
 }
 ```
 
-### 3. Add its route
+#### 3. Implement the game
 
-Create `src/app/games/<game-name>/page.tsx` using the App Router.
+Build your game logic and UI in `Game.tsx`.
 
-**That's it.** No changes to the sidebar, filters, search, homepage, or layout are needed. The new game appears automatically in the catalog.
+#### 4. Register in the registry
+
+Add one line to `src/registry/games.ts`:
+
+```ts
+import { config as myGame } from '@/features/games/all/my-game/config'
+
+const gamesList: GameRegistryEntry[] = [
+  // ... existing games
+  { config: myGame },
+]
+```
+
+**That's it.** The game automatically appears in:
+- The catalog grid with search, filter, and sort
+- Sidebar category counts
+- Featured/popular/new sections (based on config flags)
+- Its own page at `/games/my-game` (dynamic route)
+
+Categories are auto-generated from the registry — no manual category updates needed.
 
 ---
 
@@ -198,13 +232,24 @@ Create `src/app/games/<game-name>/page.tsx` using the App Router.
 | Directory | Purpose |
 |---|---|
 | `src/app/` | Pages and routes |
+| `src/registry/` | Central game registry (single source of truth) |
+| `src/game-template/` | Template for scaffolding new games |
 | `src/components/ui/` | Reusable UI primitives |
 | `src/components/layout/` | Navbar, Footer |
 | `src/features/home/` | Homepage sections |
-| `src/features/games/` | Game catalog, filters, cards |
+| `src/features/games/` | Game catalog + individual game modules |
 | `src/constants/` | Application constants |
-| `src/types/` | TypeScript interfaces |
+| `src/types/` | TypeScript interfaces (GameConfig, etc.) |
 | `src/hooks/` | Custom React hooks |
+
+## Key Principles
+
+- **Registry as single source of truth** — all game metadata comes from `registry/games.ts`
+- **Auto-generated categories** — derived from the registry, never written manually
+- **Zero structural changes** to add a game — no components, pages, or hooks need editing
+- **Isolated game modules** — each game in its own folder with `config.ts` + `Game.tsx`
+- **Dynamic routing** — `/games/[slug]` loads the correct game automatically
+- **Home doesn't know individual games** — it only consumes the registry
 
 ---
 

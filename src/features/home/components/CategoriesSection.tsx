@@ -1,6 +1,6 @@
 import { Container } from '@/components/ui/Container'
 import { SectionTitle } from '@/components/ui/SectionTitle'
-import { CATEGORIES } from '@/constants/categories'
+import { categories } from '@/registry/categories'
 import { CategoryCard } from './CategoryCard'
 
 export function CategoriesSection() {
@@ -15,7 +15,7 @@ export function CategoriesSection() {
         />
 
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {CATEGORIES.map((category) => (
+          {categories.map((category) => (
             <CategoryCard key={category.id} category={category} />
           ))}
         </div>

@@ -1,8 +1,8 @@
-import type { Game } from '@/types/game'
+import type { GameConfig } from '@/types/game'
 import { GameCard } from './GameCard'
 
 interface GamesGridProps {
-  games: Game[]
+  games: GameConfig[]
 }
 
 export function GamesGrid({ games }: GamesGridProps) {

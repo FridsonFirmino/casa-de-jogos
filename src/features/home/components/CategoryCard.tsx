@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import type { Category } from '@/types/category'
+import type { CategoryInfo } from '@/registry/categories'
 
 interface CategoryCardProps {
-  category: Category
+  category: CategoryInfo
 }
 
 export function CategoryCard({ category }: CategoryCardProps) {

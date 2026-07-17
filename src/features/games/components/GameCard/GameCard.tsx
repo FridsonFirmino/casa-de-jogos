@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import { Play } from 'lucide-react'
-import type { Game } from '@/types/game'
+import type { GameConfig } from '@/types/game'
 
 interface GameCardProps {
-  game: Game
+  game: GameConfig
 }
 
 export function GameCard({ game }: GameCardProps) {
@@ -11,7 +11,7 @@ export function GameCard({ game }: GameCardProps) {
     <article className="group relative overflow-hidden rounded-2xl border border-zinc-800/50 bg-zinc-900 transition-all duration-500 hover:scale-[1.02] hover:border-zinc-700/50 hover:shadow-2xl hover:shadow-violet-500/5">
       <div className="relative aspect-[3/4]">
         <Image
-          src={game.urlPhoto ?? `https://picsum.photos/seed/${game.slug}/800/600`}
+          src={game.thumbnail}
           alt={game.title}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -20,7 +20,7 @@ export function GameCard({ game }: GameCardProps) {
 
         <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/40 to-transparent" />
 
-        {game.new && (
+        {game.isNew && (
           <div className="absolute left-3 top-3 z-10 rounded-full bg-emerald-500 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-white shadow-lg">
             Novo
           </div>
@@ -58,7 +58,7 @@ export function GameCard({ game }: GameCardProps) {
               <span className="ml-1">{game.rating.toFixed(1)}</span>
             </div>
             <div className="flex items-center gap-3">
-              <span>⏱ {game.playTime}</span>
+              <span>⏱ {game.averagePlayTime}</span>
               <span>👤 {game.players}</span>
             </div>
           </div>

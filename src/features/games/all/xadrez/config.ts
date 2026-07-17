@@ -1,0 +1,26 @@
+import type { GameConfig } from '@/types/game'
+
+export const config: GameConfig = {
+  id: 'xadrez',
+  slug: 'xadrez',
+  title: 'Xadrez',
+  description: 'O clássico jogo de estratégia milenar.',
+  shortDescription: 'O clássico jogo de estratégia.',
+  thumbnail: 'https://picsum.photos/id/262/400/300',
+  cover: 'https://picsum.photos/seed/xadrez-cover/800/600',
+  categoryId: 'estrategia',
+  category: 'Estratégia',
+  difficulty: 'Hard',
+  players: '1-2',
+  averagePlayTime: '30 min',
+  averagePlayTimeMinutes: 30,
+  tags: ["Estratégia", "Clássico", "Offline"],
+  featured: false,
+  popular: false,
+  isNew: false,
+  status: 'published',
+  version: '1.0.0',
+  rating: 4.7,
+  gradient: 'from-neutral-600 to-zinc-700',
+  releaseDate: '2024-10-01',
+}

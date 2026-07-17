@@ -1,5 +1,5 @@
 import { Container } from "@/components/ui/Container";
-import { CATEGORIES } from "@/constants/categories";
+import { categories } from "@/registry/categories";
 import Link from "next/link";
 
 export function Footer() {
@@ -23,7 +23,7 @@ export function Footer() {
               Categorias
             </h3>
             <ul className="space-y-3">
-              {CATEGORIES.slice(0, 6).map((category) => (
+              {categories.slice(0, 6).map((category) => (
                 <li key={category.id}>
                   <Link
                     href={`/games?categoria=${category.slug}`}
@@ -117,7 +117,7 @@ export function Footer() {
 
         <div className="mt-12 border-t border-zinc-800/50 pt-8 text-center">
           <p className="text-sm text-zinc-600">
-            &copy; {new Date().getFullYear()} Games Hub. Feito com ❤️ por
+            &copy; {new Date().getFullYear()} Casa de Jogos. Feito com ❤️ por
             Fridson Firmino.
           </p>
         </div>

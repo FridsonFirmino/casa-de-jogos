@@ -1,6 +1,6 @@
-# Games Hub — Architecture & Development Guide
+# Casa de Jogos — Architecture & Development Guide
 
-This document defines the architecture, conventions, and standards for the Games Hub project. Every contribution must follow these rules.
+This document defines the architecture, conventions, and standards for the Casa de Jogos project. Every contribution must follow these rules.
 
 ---
 
@@ -131,6 +131,7 @@ feature/
 - Avoid unnecessary comments — code should speak for itself.
 
 **Principles to follow:**
+
 - SOLID (where applicable)
 - DRY
 - KISS
@@ -195,6 +196,7 @@ feature/
 ## SEO
 
 Use Next.js Metadata API:
+
 - `title`
 - `description`
 - `keywords`
@@ -238,6 +240,7 @@ features/
 The architecture must support **50+, 100+, 200+ games** without major refactoring.
 
 Adding a new game requires only:
+
 1. Create a new feature folder.
 2. Register the game in the catalog.
 3. Add its route.
@@ -250,4 +253,4 @@ Adding a new game requires only:
 
 A codebase that feels built by an experienced team — focused on scalability, organization, maintainability, and great developer experience (DX).
 
-The Games Hub must grow continuously, where adding a new game is simple, predictable, and consistent — without impacting existing games or requiring structural changes.
+The Casa de Jogos must grow continuously, where adding a new game is simple, predictable, and consistent — without impacting existing games or requiring structural changes.

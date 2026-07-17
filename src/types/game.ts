@@ -1,21 +1,38 @@
-export interface Game {
+import type { ComponentType } from 'react'
+
+export type Difficulty = 'Easy' | 'Medium' | 'Hard'
+export type GameStatus = 'published' | 'draft' | 'coming-soon'
+
+export interface GameConfig {
   id: string
-  title: string
   slug: string
+  title: string
   description: string
+  shortDescription: string
+  thumbnail: string
+  cover: string
   categoryId: string
-  difficulty: 'Easy' | 'Medium' | 'Hard'
-  playTime: string
-  playTimeMinutes: number
-  gradient: string
-  featured: boolean
-  rating: number
+  category: string
+  difficulty: Difficulty
   players: string
+  averagePlayTime: string
+  averagePlayTimeMinutes: number
   tags: string[]
-  new: boolean
+  featured: boolean
   popular: boolean
+  isNew: boolean
+  status: GameStatus
+  version: string
+  rating: number
+  gradient: string
   releaseDate: string
   urlPhoto?: string
+  component?: ComponentType
+}
+
+export interface GameRegistryEntry {
+  config: GameConfig
+  component?: ComponentType
 }
 
 export type SortOption =

@@ -1,0 +1,26 @@
+import type { GameConfig } from '@/types/game'
+
+export const config: GameConfig = {
+  id: 'dino-run',
+  slug: 'dino-run',
+  title: 'Dino Run',
+  description: 'Corra sem parar e desvie dos obstáculos.',
+  shortDescription: 'Corra sem parar.',
+  thumbnail: 'https://picsum.photos/id/125/400/300',
+  cover: 'https://picsum.photos/seed/dino-run-cover/800/600',
+  categoryId: 'arcade',
+  category: 'Arcade',
+  difficulty: 'Medium',
+  players: '1',
+  averagePlayTime: '10 min',
+  averagePlayTimeMinutes: 10,
+  tags: ["Arcade", "Offline"],
+  featured: false,
+  popular: false,
+  isNew: false,
+  status: 'published',
+  version: '1.0.0',
+  rating: 4.3,
+  gradient: 'from-stone-500 to-zinc-600',
+  releaseDate: '2024-08-05',
+}

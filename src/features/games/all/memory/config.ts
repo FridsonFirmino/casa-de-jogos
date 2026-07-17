@@ -1,0 +1,26 @@
+import type { GameConfig } from '@/types/game'
+
+export const config: GameConfig = {
+  id: 'memory',
+  slug: 'memory',
+  title: 'Jogo da Memória',
+  description: 'Encontre todos os pares e teste sua memória.',
+  shortDescription: 'Teste sua memória encontrando os pares.',
+  thumbnail: 'https://picsum.photos/id/20/400/300',
+  cover: 'https://picsum.photos/seed/memory-cover/800/600',
+  categoryId: 'memoria',
+  category: 'Memória',
+  difficulty: 'Easy',
+  players: '1',
+  averagePlayTime: '10 min',
+  averagePlayTimeMinutes: 10,
+  tags: ["Casual", "Offline"],
+  featured: true,
+  popular: true,
+  isNew: false,
+  status: 'published',
+  version: '1.0.0',
+  rating: 4.7,
+  gradient: 'from-pink-500 to-rose-600',
+  releaseDate: '2024-03-05',
+}

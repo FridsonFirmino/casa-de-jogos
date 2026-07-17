@@ -1,0 +1,26 @@
+import type { GameConfig } from '@/types/game'
+
+export const config: GameConfig = {
+  id: 'campo-minado',
+  slug: 'campo-minado',
+  title: 'Campo Minado',
+  description: 'Encontre todas as minas sem explodi-las.',
+  shortDescription: 'Encontre as minas sem explodir.',
+  thumbnail: 'https://picsum.photos/id/347/400/300',
+  cover: 'https://picsum.photos/seed/campo-minado-cover/800/600',
+  categoryId: 'puzzle',
+  category: 'Puzzle',
+  difficulty: 'Medium',
+  players: '1',
+  averagePlayTime: '15 min',
+  averagePlayTimeMinutes: 15,
+  tags: ["Puzzle", "Clássico", "Offline"],
+  featured: false,
+  popular: false,
+  isNew: false,
+  status: 'published',
+  version: '1.0.0',
+  rating: 4.2,
+  gradient: 'from-slate-500 to-gray-600',
+  releaseDate: '2024-04-20',
+}

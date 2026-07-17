@@ -1,0 +1,26 @@
+import type { GameConfig } from '@/types/game'
+
+export const config: GameConfig = {
+  id: 'game-template',
+  slug: 'game-template',
+  title: 'Game Template',
+  description: 'Description of the game goes here.',
+  shortDescription: 'A short description.',
+  thumbnail: 'https://picsum.photos/seed/template/400/300',
+  cover: 'https://picsum.photos/seed/template-cover/800/600',
+  categoryId: 'arcade',
+  category: 'Arcade',
+  difficulty: 'Medium',
+  players: '1',
+  averagePlayTime: '10 min',
+  averagePlayTimeMinutes: 10,
+  tags: ['Template'],
+  featured: false,
+  popular: false,
+  isNew: false,
+  status: 'draft',
+  version: '0.1.0',
+  rating: 0,
+  gradient: 'from-zinc-500 to-zinc-600',
+  releaseDate: new Date().toISOString().split('T')[0],
+}
