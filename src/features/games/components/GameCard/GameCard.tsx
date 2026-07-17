@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { Play } from 'lucide-react'
 import type { GameConfig } from '@/types/game'
 
@@ -8,7 +9,10 @@ interface GameCardProps {
 
 export function GameCard({ game }: GameCardProps) {
   return (
-    <article className="group relative overflow-hidden rounded-2xl border border-zinc-800/50 bg-zinc-900 transition-all duration-500 hover:scale-[1.02] hover:border-zinc-700/50 hover:shadow-2xl hover:shadow-violet-500/5">
+    <Link
+      href={`/games/${game.slug}`}
+      className="group relative block overflow-hidden rounded-2xl border border-zinc-800/50 bg-zinc-900 transition-all duration-500 hover:scale-[1.02] hover:border-zinc-700/50 hover:shadow-2xl hover:shadow-violet-500/5"
+    >
       <div className="relative aspect-[3/4]">
         <Image
           src={game.thumbnail}
@@ -63,12 +67,12 @@ export function GameCard({ game }: GameCardProps) {
             </div>
           </div>
 
-          <button className="mt-1 flex w-full items-center justify-center gap-2 rounded-xl bg-white/10 backdrop-blur-sm py-2.5 text-sm font-medium text-white transition-all duration-300 hover:bg-violet-600 hover:shadow-lg hover:shadow-violet-500/25 active:scale-[0.98]">
+          <span className="mt-1 flex w-full items-center justify-center gap-2 rounded-xl bg-white/10 backdrop-blur-sm py-2.5 text-sm font-medium text-white transition-all duration-300 group-hover:bg-violet-600 group-hover:shadow-lg group-hover:shadow-violet-500/25">
             <Play className="h-4 w-4" />
             Jogar Agora
-          </button>
+          </span>
         </div>
       </div>
-    </article>
+    </Link>
   )
 }
