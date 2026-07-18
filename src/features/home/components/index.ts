@@ -1,8 +1,5 @@
-export { HeroSection } from './HeroSection'
-export { FeaturedGames } from './FeaturedGames'
-export { CategoriesSection } from './CategoriesSection'
-export { ContinueExploring } from './ContinueExploring'
-export { StatsSection } from './StatsSection'
-export { HowItWorks } from './HowItWorks'
-export { BenefitsSection } from './BenefitsSection'
-export { FinalCTA } from './FinalCTA'
+export { BenefitsSection } from "./BenefitsSection";
+export { FeaturedGames } from "./FeaturedGames";
+export { HeroSection } from "./HeroSection";
+export { HowItWorks } from "./HowItWorks";
+export { StatsSection } from "./StatsSection";
