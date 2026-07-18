@@ -1,6 +1,6 @@
 # Casa de Jogos
 
-A modern, scalable games hub built with Next.js 16. Play classic browser games instantly — no downloads, no sign-ups.
+Um hub de jogos moderno e escalável construído com Next.js 16. Jogue jogos clássicos de navegador instantaneamente sem downloads, sem cadastro.
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
@@ -9,94 +9,92 @@ A modern, scalable games hub built with Next.js 16. Play classic browser games i
 
 ---
 
-## Tech Stack
+## Stack Tecnológica
 
-| Layer | Technology |
-|---|---|
-| Framework | [Next.js 16](https://nextjs.org) (App Router) |
-| Language | [TypeScript 5](https://www.typescriptlang.org) |
-| Styling | [Tailwind CSS 4](https://tailwindcss.com) |
-| Icons | [Lucide React](https://lucide.dev) |
-| UI Primitives | Custom components |
-| Package Manager | [pnpm](https://pnpm.io) |
+| Camada                 | Tecnologia                                     |
+| ---------------------- | ---------------------------------------------- |
+| Framework              | [Next.js 16](https://nextjs.org) (App Router)  |
+| Linguagem              | [TypeScript 5](https://www.typescriptlang.org) |
+| Estilização            | [Tailwind CSS 4](https://tailwindcss.com)      |
+| Ícones                 | [Lucide React](https://lucide.dev)             |
+| Primitivas de UI       | Componentes personalizados                     |
+| Gerenciador de Pacotes | [pnpm](https://pnpm.io)                        |
 
 ---
 
-## Architecture
+## Arquitetura
 
-Feature-Based Architecture organized for scalability. Each game lives as an independent feature — adding a new game requires zero changes to the core structure.
+Arquitetura baseada em funcionalidades organizada para escalabilidade. Cada jogo vive como uma funcionalidade independente, adicionar um novo jogo requer zero alterações na estrutura principal.
 
 ```
 src/
-├── app/                    # Next.js App Router pages
-├── registry/               # Central game registry (single source of truth)
-│   ├── games.ts            #   - Game catalog import & export
-│   └── categories.ts       #   - Auto-generated categories from registry
-├── game-template/          # Template for creating new games
+├── app/                    # Páginas do Next.js App Router
+├── registry/               # Registro central de jogos (fonte única da verdade)
+│   ├── games.ts            #   - Catálogo de jogos (importação e exportação)
+│   └── categories.ts       #   - Categorias geradas automaticamente do registro
+├── game-template/          # Template para criar novos jogos
 ├── components/
-│   ├── ui/                 # Shared primitives (Button, Container, Badge...)
+│   ├── ui/                 # Primitivas compartilhadas (Button, Container, Badge...)
 │   ├── layout/             # Navbar, Footer
-│   └── shared/             # App-level shared components
-├── features/               # Feature modules
-│   ├── home/               # Homepage sections
-│   ├── games/              # Game catalog, filters, game cards
-│   │   ├── components/     #   - Shared game UI components
-│   │   ├── hooks/          #   - Game-related hooks
-│   │   └── all/            #   - All individual games
-│   │       ├── snake/      #   - Individual game module
-│   │       ├── pong/       #   - Individual game module
-│   │       ├── memory/     #   - Individual game module
-│   │       └── ...         #   - Each game is self-contained
-│   └── categories/         # Category browsing
-├── hooks/                  # Shared custom hooks
-├── constants/              # Constants (routes, navigation...)
-├── types/                  # TypeScript interfaces
-├── utils/                  # Utility functions
-├── lib/                    # Library configurations
-├── services/               # API services
-├── assets/                 # Static assets
-└── styles/                 # Global styles
+│   └── shared/             # Componentes compartilhados do app
+├── features/               # Módulos de funcionalidades
+│   ├── home/               # Seções da página inicial
+│   ├── games/              # Catálogo de jogos, filtros, cards de jogos
+│   │   ├── components/     #   - Componentes de UI compartilhados de jogos
+│   │   ├── hooks/          #   - Hooks relacionados a jogos
+│   │   └── all/            #   - Todos os jogos individuais
+│   │       ├── snake/      #   - Módulo de jogo individual
+│   │       └── ...         #   - Cada jogo é autocontido
+│   └── categories/         # Navegação por categorias
+├── hooks/                  # Custom hooks compartilhados
+├── constants/              # Constantes (rotas, navegação...)
+├── types/                  # Interfaces TypeScript
+├── utils/                  # Funções utilitárias
+├── lib/                    # Configurações de bibliotecas
+├── services/               # Serviços de API
+├── assets/                 # Assets estáticos
+└── styles/                 # Estilos globais
 ```
 
-### Per-Game Structure
+### Estrutura por Jogo
 
-Every game follows an identical structure for consistency:
+Cada jogo segue uma estrutura idêntica para consistência:
 
 ```
-features/games/all/<game-name>/
-├── assets/          # Game-specific images, sounds
-├── components/      # Game-specific components
-├── constants/       # Game-specific constants
-├── engine/          # Game logic/engine
-├── hooks/           # Game-specific hooks
-├── utils/           # Game-specific utilities
-├── Game.tsx         # Main game component (default export)
-├── config.ts        # All metadata lives here
-└── index.ts         # Public API (exports config + component)
+features/games/all/<nome-do-jogo>/
+├── assets/          # Imagens e sons específicos do jogo
+├── components/      # Componentes específicos do jogo
+├── constants/       # Constantes específicas do jogo
+├── engine/          # Lógica/motor do jogo
+├── hooks/           # Hooks específicos do jogo
+├── utils/           # Utilitários específicos do jogo
+├── Game.tsx         # Componente principal do jogo (exportação padrão)
+├── config.ts        # Metadados do jogo
+└── index.ts         # API pública (exporta config + componente)
 ```
 
 ---
 
-## Getting Started
+## Começando
 
-### Prerequisites
+### Pré-requisitos
 
 - [Node.js](https://nodejs.org) >= 20
 - [pnpm](https://pnpm.io/installation) >= 9
 
-### Install
+### Instalar
 
 ```bash
 pnpm install
 ```
 
-### Development
+### Desenvolvimento
 
 ```bash
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Abra [http://localhost:3000](http://localhost:3000).
 
 ### Build
 
@@ -110,7 +108,7 @@ pnpm build
 pnpm lint
 ```
 
-### Type Check
+### Verificação de Tipos
 
 ```bash
 npx tsc --noEmit
@@ -118,164 +116,165 @@ npx tsc --noEmit
 
 ---
 
-## Adding a New Game
+## Adicionar um Novo Jogo
 
-Adding a new game requires **zero structural changes**. The entire app consumes the game registry — no component, page, or hook needs editing.
+Adicionar um novo jogo requer **zero alterações estruturais**. O aplicativo inteiro consome o registro de jogos — nenhum componente, página ou hook precisa ser editado.
 
-### Step-by-step
+### Passo a passo
 
-#### 1. Copy the template
+#### 1. Copie o template
 
 ```bash
-cp -r src/game-template src/features/games/all/my-game
+cp -r src/game-template src/features/games/all/meu-jogo
 ```
 
-#### 2. Configure metadata
+#### 2. Configure os metadados
 
-Edit `src/features/games/all/my-game/config.ts`:
+Edite `src/features/games/all/meu-jogo/config.ts`:
 
 ```ts
 export const config: GameConfig = {
-  id: 'my-game',
-  slug: 'my-game',
-  title: 'My Game',
-  description: 'A fun new game description.',
-  shortDescription: 'A fun new game.',
-  thumbnail: 'https://picsum.photos/id/42/400/300',
-  cover: 'https://picsum.photos/id/42/800/600',
-  categoryId: 'arcade',
-  category: 'Arcade',
-  difficulty: 'Medium',
-  players: '1',
-  averagePlayTime: '10 min',
+  id: "meu-jogo",
+  slug: "meu-jogo",
+  title: "Meu Jogo",
+  description: "Descrição do novo jogo.",
+  shortDescription: "Um jogo novo divertido.",
+  thumbnail: "https://picsum.photos/id/42/400/300",
+  cover: "https://picsum.photos/id/42/800/600",
+  categoryId: "arcade",
+  category: "Arcade",
+  difficulty: "Médio",
+  players: "1",
+  averagePlayTime: "10 min",
   averagePlayTimeMinutes: 10,
-  tags: ['Arcade', 'Novo'],
+  tags: ["Arcade", "Novo"],
   featured: true,
   popular: true,
   isNew: true,
-  status: 'published',
-  version: '1.0.0',
+  status: "published",
+  version: "1.0.0",
   rating: 4.5,
-  gradient: 'from-indigo-500 to-violet-600',
-  releaseDate: '2025-01-01',
-}
+  gradient: "from-indigo-500 to-violet-600",
+  releaseDate: "2025-01-01",
+};
 ```
 
-#### 3. Implement the game
+#### 3. Implemente o jogo
 
-Build your game logic and UI in `Game.tsx`.
+Construa a lógica e a UI do seu jogo em `Game.tsx`.
 
-#### 4. Register in the registry
+#### 4. Registre no registro
 
-Add one line to `src/registry/games.ts`:
+Adicione uma linha em `src/registry/games.ts`:
 
 ```ts
-import { config as myGame } from '@/features/games/all/my-game/config'
+import { config as meuJogo } from "@/features/games/all/meu-jogo/config";
 
 const gamesList: GameRegistryEntry[] = [
-  // ... existing games
-  { config: myGame },
-]
+  // ... jogos existentes
+  { config: meuJogo },
+];
 ```
 
-**That's it.** The game automatically appears in:
-- The catalog grid with search, filter, and sort
-- Sidebar category counts
-- Featured/popular/new sections (based on config flags)
-- Its own page at `/games/my-game` (dynamic route)
+**Pronto.** O jogo aparece automaticamente em:
 
-Categories are auto-generated from the registry — no manual category updates needed.
+- Grade do catálogo com busca, filtro e ordenação
+- Contagens de categorias na barra lateral
+- Seções de destaque/populares/novos (baseado nas flags de configuração)
+- Sua própria página em `/games/meu-jogo` (rota dinâmica)
+
+As categorias são geradas automaticamente a partir do registro — nenhuma atualização manual de categorias é necessária.
 
 ---
 
-## Project Guidelines
+## Diretrizes do Projeto
 
-### Code Quality
+### Qualidade de Código
 
-- **No `any`** — every value must have a specific type.
-- Small functions with a single responsibility.
-- Self-explanatory code over comments.
-- Follow **SOLID**, **DRY**, **KISS**, and **Clean Code** principles.
-- Composition over inheritance.
+- **Sem `any`** — cada valor deve ter um tipo específico.
+- Funções pequenas com responsabilidade única.
+- Código autoexplicativo em vez de comentários.
+- Siga os princípios **SOLID**, **DRY**, **KISS** e **Clean Code**.
+- Composição em vez de herança.
 
-### Components
+### Componentes
 
-- One component = one responsibility.
-- Reusable components live in `components/ui/` or `components/shared/`.
-- Never duplicate code — if it's used twice, extract it.
+- Um componente = uma responsabilidade.
+- Componentes reutilizáveis ficam em `components/ui/` ou `components/shared/`.
+- Nunca duplique código — se for usado duas vezes, extraia.
 
 ### Server Components
 
-- Prefer Server Components by default.
-- Only add `"use client"` when using `useState`, `useEffect`, events, animations, canvas, or browser APIs.
+- Prefira Server Components por padrão.
+- Adicione `"use client"` apenas ao usar `useState`, `useEffect`, eventos, animações, canvas ou APIs do navegador.
 
-### Styling
+### Estilização
 
-- Tailwind CSS only — no CSS modules or inline styles.
-- Mobile-first responsive design.
-- Consistent spacing, grid, and typography.
+- Tailwind CSS apenas — sem CSS modules ou estilos inline.
+- Design responsivo mobile-first.
+- Espaçamento, grade e tipografia consistentes.
 
 ### Imports
 
-- Always use absolute imports with `@/` prefix (e.g., `@/components/ui/Button`).
-- No long relative paths.
+- Sempre use imports absolutos com prefixo `@/` (ex.: `@/components/ui/Button`).
+- Sem caminhos relativos longos.
 
-### State
+### Estado
 
-- React state + Context API only.
-- No Redux, Zustand, or external state libraries.
-
----
-
-## Project Structure Overview
-
-| Directory | Purpose |
-|---|---|
-| `src/app/` | Pages and routes |
-| `src/registry/` | Central game registry (single source of truth) |
-| `src/game-template/` | Template for scaffolding new games |
-| `src/components/ui/` | Reusable UI primitives |
-| `src/components/layout/` | Navbar, Footer |
-| `src/features/home/` | Homepage sections |
-| `src/features/games/` | Game catalog + individual game modules |
-| `src/constants/` | Application constants |
-| `src/types/` | TypeScript interfaces (GameConfig, etc.) |
-| `src/hooks/` | Custom React hooks |
-
-## Key Principles
-
-- **Registry as single source of truth** — all game metadata comes from `registry/games.ts`
-- **Auto-generated categories** — derived from the registry, never written manually
-- **Zero structural changes** to add a game — no components, pages, or hooks need editing
-- **Isolated game modules** — each game in its own folder with `config.ts` + `Game.tsx`
-- **Dynamic routing** — `/games/[slug]` loads the correct game automatically
-- **Home doesn't know individual games** — it only consumes the registry
+- React state + Context API apenas.
+- Sem Redux, Zustand ou bibliotecas de estado externas.
 
 ---
 
-## Contributing
+## Visão Geral da Estrutura do Projeto
 
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/my-feature`).
-3. Make your changes following the project conventions above.
-4. Run lint and type check:
+| Diretório                | Propósito                                          |
+| ------------------------ | -------------------------------------------------- |
+| `src/app/`               | Páginas e rotas                                    |
+| `src/registry/`          | Registro central de jogos (fonte única da verdade) |
+| `src/game-template/`     | Template para criar novos jogos                    |
+| `src/components/ui/`     | Primitivas de UI reutilizáveis                     |
+| `src/components/layout/` | Navbar, Footer                                     |
+| `src/features/home/`     | Seções da página inicial                           |
+| `src/features/games/`    | Catálogo de jogos + módulos individuais            |
+| `src/constants/`         | Constantes da aplicação                            |
+| `src/types/`             | Interfaces TypeScript (GameConfig, etc.)           |
+| `src/hooks/`             | Custom Hooks React                                 |
+
+## Princípios-chave
+
+- **Registro como fonte única da verdade** — todos os metadados dos jogos vêm de `registry/games.ts`
+- **Categorias geradas automaticamente** — derivadas do registro, nunca escritas manualmente
+- **Zero alterações estruturais** para adicionar um jogo — nenhum componente, página ou hook precisa ser editado
+- **Módulos de jogo isolados** — cada jogo em sua própria pasta com `config.ts` + `Game.tsx`
+- **Roteamento dinâmico** — `/games/[slug]` carrega o jogo correto automaticamente
+- **Home não conhece jogos individuais** — ela apenas consome o registro
+
+---
+
+## Contribuindo
+
+1. Faça um fork do repositório.
+2. Crie um branch de funcionalidade (`git checkout -b feature/minha-funcionalidade`).
+3. Faça suas alterações seguindo as convenções do projeto acima.
+4. Execute lint e verificação de tipos:
 
 ```bash
 pnpm lint
 npx tsc --noEmit
 ```
 
-5. Ensure the build passes:
+5. Certifique-se de que o build passa:
 
 ```bash
 pnpm build
 ```
 
-6. Commit with a clear, descriptive message.
-7. Push to your branch and open a Pull Request.
+6. Faça um commit com uma mensagem clara e descritiva.
+7. Envie para seu branch e abra um Pull Request.
 
 ---
 
-## License
+## Licença
 
-This project is licensed under the MIT License.
+Este projeto está licenciado sob a Licença MIT.
