@@ -11,7 +11,7 @@ export function GameCard({ game }: GameCardProps) {
   return (
     <Link
       href={`/games/${game.slug}`}
-      className="group relative block overflow-hidden rounded-2xl border border-zinc-800/50 bg-zinc-900 transition-all duration-500 hover:scale-[1.02] hover:border-zinc-700/50 hover:shadow-2xl hover:shadow-violet-500/5"
+      className="group relative block overflow-hidden rounded-2xl border border-zinc-800/50 bg-zinc-900 transition-all duration-500 hover:scale-[1.02] hover:border-zinc-700/50 hover:shadow-2xl hover:shadow-highlight/5"
     >
       <div className="relative aspect-[3/4]">
         <Image
@@ -31,7 +31,7 @@ export function GameCard({ game }: GameCardProps) {
         )}
 
         <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-500/80 backdrop-blur-sm shadow-lg shadow-violet-500/30 transition-all duration-500 group-hover:scale-110">
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/80 backdrop-blur-sm shadow-lg shadow-accent/30 transition-all duration-500 group-hover:scale-110">
             <Play className="h-7 w-7 text-white translate-x-0.5" />
           </div>
         </div>
@@ -67,7 +67,7 @@ export function GameCard({ game }: GameCardProps) {
             </div>
           </div>
 
-          <span className="mt-1 flex w-full items-center justify-center gap-2 rounded-xl bg-white/10 backdrop-blur-sm py-2.5 text-sm font-medium text-white transition-all duration-300 group-hover:bg-violet-600 group-hover:shadow-lg group-hover:shadow-violet-500/25">
+          <span className="mt-1 flex w-full items-center justify-center gap-2 rounded-xl bg-white/10 backdrop-blur-sm py-2.5 text-sm font-medium text-white transition-all duration-300 group-hover:bg-highlight group-hover:shadow-lg group-hover:shadow-highlight/25">
             <Play className="h-4 w-4" />
             Jogar Agora
           </span>

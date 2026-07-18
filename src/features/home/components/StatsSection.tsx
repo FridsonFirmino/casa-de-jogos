@@ -11,7 +11,7 @@ function AnimatedStat({ value, suffix, label, prefix }: { value: number; suffix:
     <div className="text-center">
       <span
         ref={ref}
-        className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-5xl font-bold text-transparent sm:text-6xl"
+        className="font-arcade bg-gradient-to-r from-accent to-highlight bg-clip-text text-5xl text-transparent sm:text-6xl"
       >
         {prefix}{count}{suffix}
       </span>
@@ -23,7 +23,7 @@ function AnimatedStat({ value, suffix, label, prefix }: { value: number; suffix:
 export function StatsSection() {
   return (
     <section className="relative py-24">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-violet-500/[0.03] to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/[0.03] to-transparent" />
 
       <Container className="relative">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">

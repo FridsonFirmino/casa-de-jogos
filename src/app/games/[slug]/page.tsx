@@ -34,7 +34,7 @@ export default async function GamePage({ params }: PageProps) {
   return (
     <section className="min-h-screen pt-28 pb-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-zinc-100">{game.title}</h1>
+        <h1 className="font-display text-3xl text-zinc-100">{game.title}</h1>
         <p className="mt-2 text-zinc-500">{game.description}</p>
         <div className="mt-8 rounded-2xl border border-zinc-800/50 bg-zinc-900/50 p-12">
           <p className="text-center text-zinc-500">Em breve...</p>

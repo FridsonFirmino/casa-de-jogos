@@ -22,7 +22,7 @@ export function SearchInput({ value, onChange }: SearchInputProps) {
         placeholder="Pesquisar um jogo..."
         value={value}
         onChange={handleChange}
-        className="w-full rounded-xl border border-zinc-800 bg-zinc-900/70 py-2.5 pl-10 pr-4 text-sm text-zinc-100 placeholder-zinc-500 outline-none transition-all focus:border-violet-500/50 focus:bg-zinc-900 focus:shadow-[0_0_0_1px_rgba(139,92,246,0.15)]"
+        className="w-full rounded-xl border border-zinc-800 bg-zinc-900/70 py-2.5 pl-10 pr-4 text-sm text-zinc-100 placeholder-zinc-500 outline-none transition-all focus:border-accent/50 focus:bg-zinc-900 focus:shadow-[0_0_0_1px_rgba(18,145,133,0.15)]"
       />
     </div>
   )

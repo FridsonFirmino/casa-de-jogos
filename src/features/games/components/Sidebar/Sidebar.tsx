@@ -44,7 +44,7 @@ export function Sidebar({
           onClick={() => onCategoryChange('')}
           className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm transition-all ${
             categoryFilter === ''
-              ? 'bg-violet-500/10 text-violet-400 font-medium'
+              ? 'bg-accent/10 text-accent font-medium'
               : 'text-zinc-400 hover:text-zinc-300 hover:bg-zinc-800/50'
           }`}
         >
@@ -52,7 +52,7 @@ export function Sidebar({
             <span>📋</span>
             <span>Todas</span>
           </span>
-          <span className={`text-xs ${categoryFilter === '' ? 'text-violet-400' : 'text-zinc-600'}`}>
+          <span className={`text-xs ${categoryFilter === '' ? 'text-accent' : 'text-zinc-600'}`}>
             {categoriesWithCount.reduce((acc, c) => acc + c.count, 0)}
           </span>
         </button>
@@ -75,7 +75,7 @@ export function Sidebar({
           onClick={() => onDifficultyChange('')}
           className={`flex w-full items-center rounded-lg px-3 py-2 text-sm transition-all ${
             difficultyFilter === ''
-              ? 'bg-violet-500/10 text-violet-400 font-medium'
+                ? 'bg-accent/10 text-accent font-medium'
               : 'text-zinc-400 hover:text-zinc-300 hover:bg-zinc-800/50'
           }`}
         >
@@ -87,7 +87,7 @@ export function Sidebar({
             onClick={() => onDifficultyChange(d.value)}
             className={`flex w-full items-center rounded-lg px-3 py-2 text-sm transition-all ${
               difficultyFilter === d.value
-                ? 'bg-violet-500/10 text-violet-400 font-medium'
+              ? 'bg-accent/10 text-accent font-medium'
                 : 'text-zinc-400 hover:text-zinc-300 hover:bg-zinc-800/50'
             }`}
           >

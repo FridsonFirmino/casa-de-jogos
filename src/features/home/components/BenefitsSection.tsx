@@ -22,7 +22,7 @@ const BENEFITS = [
   },
   {
     icon: Smartphone,
-    title: "Funciona no celular",
+    title: "Funciona no Telefone",
     description: "Todos os jogos são otimizados para dispositivos móveis.",
   },
   {
@@ -38,7 +38,7 @@ const BENEFITS = [
   {
     icon: Smile,
     title: "Gratuito",
-    description: "100% gratuito. Sem taxas escondidas ou planos premium.",
+    description: "100% gratuito. Sem taxas ou planos.",
   },
 ];
 
@@ -57,8 +57,8 @@ export function BenefitsSection() {
               key={benefit.title}
               className="group rounded-2xl border border-zinc-800/50 bg-zinc-900/30 p-6 transition-all duration-300 hover:border-zinc-700/50 hover:bg-zinc-900/60"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 transition-colors group-hover:bg-violet-500/20">
-                <benefit.icon className="h-6 w-6 text-violet-400" />
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 transition-colors group-hover:bg-accent/20">
+                <benefit.icon className="h-6 w-6 text-accent" />
               </div>
               <h3 className="text-lg font-semibold text-zinc-100">
                 {benefit.title}
