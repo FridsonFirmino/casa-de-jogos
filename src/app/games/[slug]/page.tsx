@@ -1,5 +1,10 @@
+import GameDetails from "@/components/games/GameDetails";
+import GameRenderer from "@/components/games/GameRenderer";
+import { CopyrightFooter } from "@/components/ui/CopyrightFooter";
 import { getGameBySlug, registry } from "@/registry/games";
+import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 interface PageProps {
@@ -32,14 +37,19 @@ export default async function GamePage({ params }: PageProps) {
   }
 
   return (
-    <section className="min-h-screen pt-28 pb-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h1 className="font-display text-3xl text-zinc-100">{game.title}</h1>
-        <p className="mt-2 text-zinc-500">{game.description}</p>
-        <div className="mt-8 rounded-2xl border border-zinc-800/50 bg-zinc-900/50 p-12">
-          <p className="text-center text-zinc-500">Em breve...</p>
-        </div>
+    <section className="flex min-h-screen flex-col">
+      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 pt-24 sm:px-6 lg:px-8">
+        <Link
+          href="/"
+          className="my-4 inline-flex items-center gap-1.5 text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-300"
+        >
+          <ArrowLeft className="h-5 w-5" />
+          Voltar ao inicio
+        </Link>
+        <GameDetails game={game} />
+        <GameRenderer slug={slug} />
       </div>
+      <CopyrightFooter />
     </section>
   );
 }

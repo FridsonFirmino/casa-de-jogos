@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { GAMES_TOTAL } from "@/registry/games";
 import Link from "next/link";
 import { HeroFloatingElements } from "./HeroFloatingElements";
 
@@ -16,7 +17,7 @@ export function HeroSection() {
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-4 py-1.5">
               <span className="h-2 w-2 rounded-full bg-highlight animate-pulse" />
               <span className="font-arcade text-sm text-accent">
-                +0 jogos gratuitos
+                {GAMES_TOTAL ?? 0} jogos gratuito
               </span>
             </div>
 
