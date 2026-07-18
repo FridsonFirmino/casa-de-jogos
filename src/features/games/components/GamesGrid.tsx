@@ -1,8 +1,8 @@
-import type { GameConfig } from '@/types/game'
-import { GameCard } from './GameCard'
+import type { GameConfig } from "@/types/game";
+import { GameCard } from "./GameCard";
 
 interface GamesGridProps {
-  games: GameConfig[]
+  games: GameConfig[];
 }
 
 export function GamesGrid({ games }: GamesGridProps) {
@@ -12,5 +12,5 @@ export function GamesGrid({ games }: GamesGridProps) {
         <GameCard key={game.id} game={game} />
       ))}
     </div>
-  )
+  );
 }
