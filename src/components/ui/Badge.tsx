@@ -12,7 +12,7 @@ export function Badge({ children, variant = 'default', className = '' }: BadgePr
 
   const variants = {
     default: 'bg-zinc-800/50 text-zinc-400 border border-zinc-700/50',
-    accent: 'bg-violet-500/10 text-violet-400 border border-violet-500/20',
+    accent: 'font-arcade bg-highlight/10 text-highlight border border-highlight/20',
   }
 
   return (

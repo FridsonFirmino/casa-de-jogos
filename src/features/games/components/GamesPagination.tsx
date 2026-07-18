@@ -29,7 +29,7 @@ export function GamesPagination({ page, totalPages, onPageChange }: GamesPaginat
             onClick={() => onPageChange(p)}
             className={`flex h-9 w-9 items-center justify-center rounded-lg text-sm font-medium transition-all ${
               p === page
-                ? 'bg-violet-500/15 text-violet-400 border border-violet-500/30'
+                ? 'bg-accent/15 text-accent border border-accent/30'
                 : 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50'
             }`}
           >

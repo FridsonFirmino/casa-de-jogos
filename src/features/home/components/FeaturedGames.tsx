@@ -16,7 +16,7 @@ export function FeaturedGames() {
           />
           <Link
             href="/games"
-            className="mb-10 hidden items-center gap-1 text-sm font-medium text-violet-400 transition-colors hover:text-violet-300 sm:flex"
+            className="font-display mb-10 hidden items-center gap-1 text-sm text-accent transition-colors hover:text-coral sm:flex"
           >
             Ver todos
             <ArrowRight className="h-4 w-4" />

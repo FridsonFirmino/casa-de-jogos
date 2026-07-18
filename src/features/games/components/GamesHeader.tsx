@@ -26,7 +26,7 @@ export function GamesHeader({
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-zinc-100">Todos os Jogos</h1>
+          <h1 className="font-display text-2xl text-zinc-100">Todos os Jogos</h1>
           <p className="mt-0.5 text-sm text-zinc-500">
             {total} jogo{total !== 1 && "s"} encontrado{total !== 1 && "s"}
           </p>

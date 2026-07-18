@@ -12,7 +12,7 @@ export function SidebarCategory({ icon, name, count, active, onClick }: SidebarC
       onClick={onClick}
       className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm transition-all ${
         active
-          ? 'bg-violet-500/10 text-violet-400 font-medium'
+          ? 'bg-accent/10 text-accent font-medium'
           : 'text-zinc-400 hover:text-zinc-300 hover:bg-zinc-800/50'
       }`}
     >
@@ -20,7 +20,7 @@ export function SidebarCategory({ icon, name, count, active, onClick }: SidebarC
         <span>{icon}</span>
         <span>{name}</span>
       </span>
-      <span className={`text-xs ${active ? 'text-violet-400' : 'text-zinc-600'}`}>
+      <span className={`text-xs ${active ? 'text-accent' : 'text-zinc-600'}`}>
         {count}
       </span>
     </button>
