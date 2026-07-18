@@ -1,10 +1,10 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { Play } from 'lucide-react'
-import type { GameConfig } from '@/types/game'
+import type { GameConfig } from "@/types/game";
+import { Play } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface GameCardProps {
-  game: GameConfig
+  game: GameConfig;
 }
 
 export function GameCard({ game }: GameCardProps) {
@@ -13,7 +13,7 @@ export function GameCard({ game }: GameCardProps) {
       href={`/games/${game.slug}`}
       className="group relative block overflow-hidden rounded-2xl border border-zinc-800/50 bg-zinc-900 transition-all duration-500 hover:scale-[1.02] hover:border-zinc-700/50 hover:shadow-2xl hover:shadow-highlight/5"
     >
-      <div className="relative aspect-[3/4]">
+      <div className="relative aspect-3/4">
         <Image
           src={game.thumbnail}
           alt={game.title}
@@ -22,7 +22,7 @@ export function GameCard({ game }: GameCardProps) {
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/40 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-zinc-900 via-zinc-900/40 to-transparent" />
 
         {game.isNew && (
           <div className="absolute left-3 top-3 z-10 rounded-full bg-emerald-500 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-white shadow-lg">
@@ -55,7 +55,14 @@ export function GameCard({ game }: GameCardProps) {
           <div className="flex items-center justify-between text-xs text-zinc-300">
             <div className="flex items-center gap-1">
               {Array.from({ length: 5 }).map((_, i) => (
-                <span key={i} className={i < Math.floor(game.rating) ? 'text-amber-400' : 'text-zinc-600'}>
+                <span
+                  key={i}
+                  className={
+                    i < Math.floor(game.rating)
+                      ? "text-amber-400"
+                      : "text-zinc-600"
+                  }
+                >
                   ★
                 </span>
               ))}
@@ -74,5 +81,5 @@ export function GameCard({ game }: GameCardProps) {
         </div>
       </div>
     </Link>
-  )
+  );
 }
