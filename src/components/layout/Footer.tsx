@@ -10,7 +10,7 @@ export function Footer() {
           <div>
             <Link href="/" className="flex items-center gap-2">
               <span className="text-lg font-bold text-zinc-100">
-                Casa de <span className="text-violet-400">Jogos</span>
+                Casa de <span className="font-display text-accent">Jogos</span>
               </span>
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-zinc-500">
@@ -62,7 +62,7 @@ export function Footer() {
                   href="/#por-que-usar"
                   className="text-sm text-zinc-500 transition-colors hover:text-zinc-300"
                 >
-                  Por que usar
+                  Por que usar?
                 </Link>
               </li>
               <li>

@@ -6,7 +6,7 @@ import { CategoryCard } from './CategoryCard'
 export function CategoriesSection() {
   return (
     <section className="relative py-24">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-violet-500/5 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent" />
 
       <Container className="relative">
         <SectionTitle

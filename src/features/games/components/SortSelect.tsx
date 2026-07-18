@@ -27,7 +27,7 @@ export function SortSelect({ value, onChange }: SortSelectProps) {
       <select
         value={value}
         onChange={handleChange}
-        className="w-full appearance-none rounded-xl border border-zinc-800 bg-zinc-900/70 px-4 py-2.5 pr-10 text-sm text-zinc-100 outline-none transition-all focus:border-violet-500/50 focus:bg-zinc-900 focus:shadow-[0_0_0_1px_rgba(139,92,246,0.15)]"
+        className="w-full appearance-none rounded-xl border border-zinc-800 bg-zinc-900/70 px-4 py-2.5 pr-10 text-sm text-zinc-100 outline-none transition-all focus:border-accent/50 focus:bg-zinc-900 focus:shadow-[0_0_0_1px_rgba(18,145,133,0.15)]"
       >
         {SORT_OPTIONS.map((opt) => (
           <option key={opt.value} value={opt.value}>

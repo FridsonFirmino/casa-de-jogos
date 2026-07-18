@@ -3,8 +3,14 @@
 @theme inline {
   --color-background: #09090B;
   --color-foreground: #fafafa;
+  --color-accent: #129185;
+  --color-accent-dark: #0e7168;
+  --color-highlight: #fec42f;
+  --color-coral: #ff5e6d;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-orbitron);
+  --font-arcade: var(--font-press-start);
 
   --animate-float: float 6s ease-in-out infinite;
   --animate-float-slow: float-slow 8s ease-in-out infinite;

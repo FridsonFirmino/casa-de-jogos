@@ -33,10 +33,10 @@ export function HowItWorks() {
           {STEPS.map((step, index) => (
             <div key={step.title} className="relative text-center">
               <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl border border-zinc-800 bg-zinc-900/50">
-                <step.icon className="h-10 w-10 text-violet-400" />
+                <step.icon className="h-10 w-10 text-accent" />
               </div>
 
-              <div className="mb-2 inline-flex h-7 w-7 items-center justify-center rounded-full bg-violet-500/10 text-sm font-medium text-violet-400">
+              <div className="mb-2 inline-flex h-7 w-7 items-center justify-center rounded-full bg-accent/10 text-sm font-medium text-accent">
                 {index + 1}
               </div>
 
