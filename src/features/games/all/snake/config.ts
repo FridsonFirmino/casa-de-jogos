@@ -25,4 +25,5 @@ export const config: GameConfig = {
   rating: 4.5,
   gradient: "from-emerald-500 to-teal-600",
   releaseDate: "2026-07-18",
+  githubUsername: "fridsonfirmino",
 };
