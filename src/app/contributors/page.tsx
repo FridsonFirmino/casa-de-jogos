@@ -14,11 +14,11 @@ export default async function ContributorsPage() {
   const contributors = await getContributorsWithProfiles();
 
   return (
-    <>
-      <main className="pt-24">
+    <div className="flex min-h-screen flex-col">
+      <main className="flex-1 pt-24">
         <section className="py-16">
           <Container>
-            <div className="mx-auto mb-16 ">
+            <div className="mx-auto mb-16">
               <h1 className="font-display text-4xl tracking-tight text-zinc-100 sm:text-5xl">
                 Contribuidores
               </h1>
@@ -47,6 +47,6 @@ export default async function ContributorsPage() {
         </section>
       </main>
       <CopyrightFooter />
-    </>
+    </div>
   );
 }
