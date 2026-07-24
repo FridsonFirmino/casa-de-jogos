@@ -156,8 +156,11 @@ export const config: GameConfig = {
   rating: 4.5,
   gradient: "from-indigo-500 to-violet-600",
   releaseDate: "2025-01-01",
+  githubUsername: "seu-usuario",
 };
 ```
+
+> **Nota:** O campo `githubUsername` é obrigatório para identificar o contribuidor responsável pelo jogo. Ele aparece na página de detalhes do jogo e na página de contribuidores.
 
 #### 3. Implemente o jogo
 
@@ -249,6 +252,7 @@ As categorias são geradas automaticamente a partir do registro — nenhuma atua
 - **Módulos de jogo isolados** — cada jogo em sua própria pasta com `config.ts` + `Game.tsx`
 - **Roteamento dinâmico** — `/games/[slug]` carrega o jogo correto automaticamente
 - **Home não conhece jogos individuais** — ela apenas consome o registro
+- **Contribuidores** — cada jogo registra seu `githubUsername`, exibindo o avatar do autor na página de detalhes do jogo e em `/contributors`
 
 ---
 

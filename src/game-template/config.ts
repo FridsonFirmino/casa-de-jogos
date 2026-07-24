@@ -23,4 +23,5 @@ export const config: GameConfig = {
   rating: 0,
   gradient: 'from-zinc-500 to-zinc-600',
   releaseDate: new Date().toISOString().split('T')[0],
+  githubUsername: 'your-github-username',
 }

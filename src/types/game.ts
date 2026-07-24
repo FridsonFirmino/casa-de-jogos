@@ -26,6 +26,7 @@ export interface GameConfig {
   rating: number
   gradient: string
   releaseDate: string
+  githubUsername: string
   urlPhoto?: string
   component?: ComponentType
 }

@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { label: "Jogos", href: "/#jogos" },
   { label: "Como funciona", href: "/#como-funciona" },
   { label: "Por que usar?", href: "/#por-que-usar" },
+  { label: "Contribuidores", href: "/contributors" },
 ];
 
 function handleAnchorClick(
@@ -83,8 +84,7 @@ export function Navbar() {
             className="flex items-center gap-2"
           >
             <span className="text-2xl font-bold text-zinc-100">
-              Casa de{" "}
-              <span className="font-display text-accent">Jogos</span>
+              Casa de <span className="font-display text-accent">Jogos</span>
             </span>
           </Link>
 

@@ -73,6 +73,14 @@ export function Footer() {
                   Todos os jogos
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/contributors"
+                  className="text-sm text-zinc-500 transition-colors hover:text-zinc-300"
+                >
+                  Contribuidores
+                </Link>
+              </li>
             </ul>
           </div>
 
