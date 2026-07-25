@@ -85,7 +85,7 @@ export default function GameDetails({ game }: GameDetailsProps) {
             }
             size={72}
           />
-          <span className="text-xs text-zinc-500">Contribuidor</span>
+          <span className="text-xs text-zinc-500">Desenvolvedor</span>
         </div>
       )}
     </div>
