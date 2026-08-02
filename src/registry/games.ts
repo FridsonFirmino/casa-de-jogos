@@ -1,9 +1,11 @@
 import type { GameConfig, GameRegistryEntry } from "@/types/game";
 
 import { config as snake } from "@/features/games/all/snake/config";
+import { config as pacman } from "@/features/games/all/pacman/config";
 
 const gamesList: GameRegistryEntry[] = [
   { config: snake },
+  { config: pacman },
   // { config: pong },
   // { config: memory },
   // { config: tictactoe },
