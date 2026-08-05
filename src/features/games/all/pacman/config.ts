@@ -8,8 +8,8 @@ export const config: GameConfig = {
   description:
     "O clássico dos arcades: coma todos os pontos, fuja dos fantasmas e vire o jogo com as pílulas de poder.",
   shortDescription: "Fuja dos fantasmas no labirinto clássico.",
-  thumbnail: thumb.src,
-  cover: thumb.src,
+  thumbnail: thumb,
+  cover: thumb,
   categoryId: "classicos",
   category: "Clássicos",
   difficulty: "Medium",

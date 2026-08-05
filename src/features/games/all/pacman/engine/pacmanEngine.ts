@@ -371,7 +371,7 @@ function resetEntityPositions(state: GameState): void {
 export function getHighScore(): number {
   if (typeof window === "undefined") return 0;
   const stored = window.localStorage.getItem("pacman-high-score");
-  return stored ? parseInt(stored, 10) : 0;
+  return stored ? Number.parseInt(stored, 10) : 0;
 }
 
 export function saveHighScore(score: number): void {
