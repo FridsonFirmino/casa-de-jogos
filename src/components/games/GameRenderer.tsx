@@ -4,7 +4,8 @@ import dynamic from 'next/dynamic'
 import type { ComponentType } from 'react'
 
 const gameComponents: Record<string, ComponentType> = {
-  snake: dynamic(() => import('@/features/games/all/snake/Game'), { ssr: false }),
+  snake: dynamic(() => import("@/features/games/all/snake/Game"), { ssr: false }),
+  pacman: dynamic(() => import("@/features/games/all/pacman/Game"), { ssr: false }),
 }
 
 interface GameRendererProps {
