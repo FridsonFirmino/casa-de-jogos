@@ -9,6 +9,12 @@ Um hub de jogos moderno e escalável construído com Next.js 16. Jogue jogos cl�
 
 ---
 
+## Status do Projeto
+
+O projeto está em **desenvolvimento ativo**. A `main` é a branch de produção e a `develop` é a branch de integração. Contribuições são bem-vindas — veja como contribuir na seção [Contribuindo](#contribuindo).
+
+---
+
 ## Stack Tecnológica
 
 | Camada                 | Tecnologia                                     |
@@ -118,7 +124,7 @@ npx tsc --noEmit
 
 ## Adicionar um Novo Jogo
 
-Adicionar um novo jogo requer **zero alterações estruturais**. O aplicativo inteiro consome o registro de jogos — nenhum componente, página ou hook precisa ser editado.
+Adicionar um novo jogo requer **pouquíssimas alterações estruturais**. O aplicativo consome o registro de jogos como fonte única da verdade — nenhuma página ou hook precisa ser editado.
 
 ### Passo a passo
 
@@ -143,7 +149,7 @@ export const config: GameConfig = {
   cover: "https://picsum.photos/id/42/800/600",
   categoryId: "arcade",
   category: "Arcade",
-  difficulty: "Médio",
+  difficulty: "Medium",
   players: "1",
   averagePlayTime: "10 min",
   averagePlayTimeMinutes: 10,
@@ -164,7 +170,7 @@ export const config: GameConfig = {
 
 #### 3. Implemente o jogo
 
-Construa a lógica e a UI do seu jogo em `Game.tsx`.
+Construa a lógica e a UI do seu jogo em `Game.tsx`. Não esqueça do `"use client"` no topo do arquivo.
 
 #### 4. Registre no registro
 
@@ -177,6 +183,18 @@ const gamesList: GameRegistryEntry[] = [
   // ... jogos existentes
   { config: meuJogo },
 ];
+```
+
+#### 5. Registre o componente no renderizador
+
+Adicione o import dinâmico do jogo em `src/components/games/GameRenderer.tsx`:
+
+```ts
+const gameComponents: Record<string, ComponentType> = {
+  snake: dynamic(() => import("@/features/games/all/snake/Game"), { ssr: false }),
+  pacman: dynamic(() => import("@/features/games/all/pacman/Game"), { ssr: false }),
+  "meu-jogo": dynamic(() => import("@/features/games/all/meu-jogo/Game"), { ssr: false }),
+};
 ```
 
 **Pronto.** O jogo aparece automaticamente em:
@@ -258,6 +276,17 @@ As categorias são geradas automaticamente a partir do registro — nenhuma atua
 
 ## Contribuindo
 
+O Casa de Jogos é um projeto open source e toda contribuição é bem-vinda: novos jogos, correções de bugs, melhorias de UI/UX, documentação e muito mais.
+
+Antes de contribuir, leia o **[CONTRIBUTING.md](CONTRIBUTING.md)** — ele explica como configurar o ambiente, criar branches, adicionar novos jogos e abrir Pull Requests.
+
+Também confira:
+
+- **[Código de Conduta](CODE_OF_CONDUCT.md)** — regras de comportamento da comunidade.
+- **[Política de Segurança](SECURITY.md)** — como reportar vulnerabilidades com segurança.
+
+Resumo rápido do fluxo:
+
 1. Faça um fork do repositório.
 2. Crie um branch de funcionalidade (`git checkout -b feature/minha-funcionalidade`).
 3. Faça suas alterações seguindo as convenções do projeto acima.
@@ -276,6 +305,8 @@ pnpm build
 
 6. Faça um commit com uma mensagem clara e descritiva.
 7. Envie para seu branch e abra um Pull Request.
+
+O CI valida automaticamente lint, typecheck e build em Pull Requests.
 
 ---
 
