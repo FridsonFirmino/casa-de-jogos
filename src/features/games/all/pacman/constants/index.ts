@@ -16,6 +16,13 @@ export const GHOST_SPAWNS: Array<[number, number]> = [
 
 export const GHOST_EXIT: [number, number] = [10, 5];
 
+export const GHOST_CORNERS: Array<[number, number]> = [
+  [17, 2],
+  [2, 2],
+  [17, 12],
+  [2, 12],
+];
+
 export const SCORES = {
   dot: 10,
   pellet: 50,

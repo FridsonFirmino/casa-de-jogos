@@ -1,6 +1,7 @@
 import {
   COLORS,
   GHOST_COLORS,
+  GHOST_CORNERS,
   GHOST_NAMES,
   GHOST_SPAWNS,
   MAP,
@@ -22,6 +23,7 @@ export interface Ghost {
   from: GridCoord;
   dir: Direction;
   mode: GhostMode;
+  corner: GridCoord;
 }
 
 export interface GameState {
@@ -42,6 +44,8 @@ export interface GameState {
   ghostCombo: number;
   frightenedTicks: number;
   spawnTicks: number;
+  phase: "scatter" | "chase";
+  phaseTicks: number;
   status: GameStatus;
 }
 
@@ -61,6 +65,9 @@ const DIRS: Vec[] = [
 const HOUSE_TILE: GridCoord = { x: 9, y: 6 };
 const EXIT_TILE: GridCoord = { x: 10, y: 5 };
 
+const SCATTER_TICKS = 90;
+const CHASE_TICKS = 105;
+
 export function inBounds(x: number, y: number): boolean {
   return x >= 0 && x < MAZE_COLS && y >= 0 && y < MAZE_ROWS;
 }
@@ -74,6 +81,14 @@ function isOpposite(a: Direction, b: Direction): boolean {
     a === "NONE" ||
     b === "NONE"
   );
+}
+
+function oppositeDir(dir: Direction): Direction {
+  if (dir === "UP") return "DOWN";
+  if (dir === "DOWN") return "UP";
+  if (dir === "LEFT") return "RIGHT";
+  if (dir === "RIGHT") return "LEFT";
+  return "NONE";
 }
 
 function buildGrid() {
@@ -120,7 +135,7 @@ function chooseDirection(
 ): Direction {
   const options: Vec[] = [];
   for (const v of DIRS) {
-    if (isOpposite(v.dir, prevDir)) continue;
+    if (prevDir !== "NONE" && isOpposite(v.dir, prevDir)) continue;
     const nx = from.x + v.dx;
     const ny = from.y + v.dy;
     if (!inBounds(nx, ny)) continue;
@@ -128,7 +143,9 @@ function chooseDirection(
       options.push(v);
     }
   }
-  if (options.length === 0) return prevDir;
+  if (options.length === 0) {
+    return prevDir === "NONE" ? "NONE" : oppositeDir(prevDir);
+  }
   if (random) {
     return options[Math.floor(Math.random() * options.length)].dir;
   }
@@ -165,6 +182,7 @@ export function createInitialState(): GameState {
     from: { x, y },
     dir: "NONE",
     mode: "house",
+    corner: { x: GHOST_CORNERS[i][0], y: GHOST_CORNERS[i][1] },
   }));
   return {
     walls,
@@ -184,6 +202,8 @@ export function createInitialState(): GameState {
     ghostCombo: 0,
     frightenedTicks: 0,
     spawnTicks: 0,
+    phase: "scatter",
+    phaseTicks: SCATTER_TICKS,
     status: "idle",
   };
 }
@@ -210,7 +230,7 @@ export function stepGame(state: GameState, desired: Direction): GameState {
   if (state.status !== "playing") return state;
   const p = state.player;
 
-  if (desired !== "NONE" && !isOpposite(p.desired, desired)) {
+  if (desired !== "NONE" && (p.desired === "NONE" || !isOpposite(p.desired, desired))) {
     p.desired = desired;
   }
 
@@ -242,6 +262,17 @@ export function stepGame(state: GameState, desired: Direction): GameState {
 
   for (const g of state.ghosts) {
     moveGhost(state, g);
+  }
+
+  state.phaseTicks--;
+  if (state.phaseTicks <= 0) {
+    if (state.phase === "scatter") {
+      state.phase = "chase";
+      state.phaseTicks = CHASE_TICKS;
+    } else {
+      state.phase = "scatter";
+      state.phaseTicks = SCATTER_TICKS;
+    }
   }
 
   checkCollisions(state);
@@ -319,7 +350,9 @@ function moveGhost(state: GameState, g: Ghost): void {
   const frightened = g.mode === "frightened";
   const target = frightened
     ? HOUSE_TILE
-    : { x: state.player.tile.x, y: state.player.tile.y };
+    : state.phase === "scatter"
+      ? g.corner
+      : { x: state.player.tile.x, y: state.player.tile.y };
   const dir = chooseDirection(state, g.tile, target, g.dir, true, frightened);
   g.dir = dir;
   g.tile = stepCell(g.tile, dir);
@@ -362,10 +395,13 @@ function resetEntityPositions(state: GameState): void {
     from: { x, y },
     dir: "NONE",
     mode: "house",
+    corner: { x: GHOST_CORNERS[i][0], y: GHOST_CORNERS[i][1] },
   }));
   state.spawnTicks = 0;
   state.frightenedTicks = 0;
   state.ghostCombo = 0;
+  state.phase = "scatter";
+  state.phaseTicks = SCATTER_TICKS;
 }
 
 export function getHighScore(): number {
