@@ -102,6 +102,10 @@ pnpm dev
 
 Abra [http://localhost:3000](http://localhost:3000).
 
+### Variáveis de ambiente (opcional)
+
+O multiplayer do Jogo da Velha usa Supabase Realtime. Copie `.env.local.example` para `.env.local` e preencha com as credenciais de um projeto gratuito em [supabase.com](https://supabase.com). Sem essas variáveis, todos os demais jogos e o modo single-player continuam funcionando normalmente.
+
 ### Build
 
 ```bash
