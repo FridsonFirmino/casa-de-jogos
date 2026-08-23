@@ -2,13 +2,14 @@ import type { GameConfig, GameRegistryEntry } from "@/types/game";
 
 import { config as snake } from "@/features/games/all/snake/config";
 import { config as pacman } from "@/features/games/all/pacman/config";
+import { config as jogoDaVelha } from "@/features/games/all/jogo-da-velha/config";
 
 const gamesList: GameRegistryEntry[] = [
   { config: snake },
   { config: pacman },
+  { config: jogoDaVelha },
   // { config: pong },
   // { config: memory },
-  // { config: tictactoe },
   // { config: spaceInvaders },
   // { config: pacman },
   // { config: breakout },
