@@ -6,6 +6,7 @@ import type { ComponentType } from 'react'
 const gameComponents: Record<string, ComponentType> = {
   snake: dynamic(() => import("@/features/games/all/snake/Game"), { ssr: false }),
   pacman: dynamic(() => import("@/features/games/all/pacman/Game"), { ssr: false }),
+  "jogo-da-velha": dynamic(() => import("@/features/games/all/jogo-da-velha/Game"), { ssr: false }),
 }
 
 interface GameRendererProps {
