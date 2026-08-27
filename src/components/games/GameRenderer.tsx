@@ -7,6 +7,7 @@ const gameComponents: Record<string, ComponentType> = {
   snake: dynamic(() => import("@/features/games/all/snake/Game"), { ssr: false }),
   pacman: dynamic(() => import("@/features/games/all/pacman/Game"), { ssr: false }),
   "jogo-da-velha": dynamic(() => import("@/features/games/all/jogo-da-velha/Game"), { ssr: false }),
+  "pedra-papel-tesoura": dynamic(() => import("@/features/games/all/pedra-papel-tesoura/Game"), { ssr: false }),
 }
 
 interface GameRendererProps {

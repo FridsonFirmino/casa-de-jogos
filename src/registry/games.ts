@@ -2,12 +2,14 @@ import type { GameConfig, GameRegistryEntry } from "@/types/game";
 
 import { config as jogoDaVelha } from "@/features/games/all/jogo-da-velha/config";
 import { config as pacman } from "@/features/games/all/pacman/config";
+import { config as pedraPapelTesoura } from "@/features/games/all/pedra-papel-tesoura/config";
 import { config as snake } from "@/features/games/all/snake/config";
 
 const gamesList: GameRegistryEntry[] = [
-  { config: snake },
-  { config: pacman },
+  { config: pedraPapelTesoura },
   { config: jogoDaVelha },
+  { config: pacman },
+  { config: snake },
   // { config: pong },
   // { config: memory },
   // { config: spaceInvaders },
@@ -36,7 +38,7 @@ export function getGamesByCategory(categoryId: string): GameConfig[] {
 }
 
 export function getFeaturedGames(): GameConfig[] {
-  return gamesList.filter((g) => g.config.featured).map((g) => g.config);
+  return gamesList.filter((g) => g.config.isNew === true).map((g) => g.config);
 }
 
 export function getPopularGames(): GameConfig[] {

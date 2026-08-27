@@ -1,9 +1,9 @@
 import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { GameCard } from "@/features/games/components/GameCard";
 import { getFeaturedGames } from "@/registry/games";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { GameCard } from "@/features/games/components/GameCard";
 
 export function FeaturedGames() {
   return (
@@ -24,9 +24,11 @@ export function FeaturedGames() {
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {getFeaturedGames().slice(0, 6).map((game) => (
-            <GameCard key={game.id} game={game} />
-          ))}
+          {getFeaturedGames()
+            .slice(0, 3)
+            .map((game) => (
+              <GameCard key={game.id} game={game} />
+            ))}
         </div>
 
         <div className="mt-8 flex justify-center sm:hidden">
