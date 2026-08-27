@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" rx="16" fill="#18181b"/>
+  <rect x="1" y="1" width="398" height="298" rx="15" stroke="#27272a" stroke-opacity="0.5"/>
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="400" y2="300" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14b8a6" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#a855f7" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" rx="16" fill="url(#grad)"/>
+  <text x="200" y="80" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="28" fill="#f4f4f5">Rock, Paper, Scissors</text>
+  <text x="200" y="115" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#71717a">Pedra, Papel e Tesoura</text>
+  <text x="120" y="200" text-anchor="middle" font-size="56">🪨</text>
+  <text x="200" y="200" text-anchor="middle" font-size="56">📄</text>
+  <text x="280" y="200" text-anchor="middle" font-size="56">✂️</text>
+  <text x="200" y="260" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#a1a1aa">VS • Multiplayer • IA</text>
+</svg>
