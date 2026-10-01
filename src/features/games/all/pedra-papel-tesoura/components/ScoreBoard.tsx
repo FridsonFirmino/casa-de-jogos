@@ -24,7 +24,7 @@ export default function ScoreBoard({
         <div className="flex flex-col items-center">
           <span className="text-xs text-zinc-500">Rodada</span>
           <span className="font-display text-sm text-zinc-300">
-            {currentRound}/{totalRounds}
+            {Math.min(currentRound, totalRounds)}/{totalRounds}
           </span>
         </div>
         <PlayerScore name={opponentName} score={score.opponent} side="right" />
