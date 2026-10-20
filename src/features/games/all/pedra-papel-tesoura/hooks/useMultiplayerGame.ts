@@ -6,14 +6,13 @@ import { getSupabaseClient } from '@/lib/supabaseClient'
 import { getWinner } from '../engine/rpsEngine'
 import {
   TOTAL_ROUNDS,
+  REVEAL_DELAY_MS,
   ROOM_CODE_ALPHABET,
   ROOM_CODE_LENGTH,
   REALTIME_CHANNEL_PREFIX,
   BROADCAST_EVENTS,
 } from '../constants'
-import {
-  generateRoomCode,
-} from '../engine/rpsEngine'
+import { generateRoomCode } from '../engine/rpsEngine'
 import type {
   Choice,
   MultiplayerPhase,
@@ -26,6 +25,13 @@ import type {
 
 interface UseMultiplayerGameOptions {
   joinRoomCode?: string
+}
+
+function createSessionId(): string {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID()
+  }
+  return `${Math.random().toString(36).slice(2)}${Date.now().toString(36)}`
 }
 
 export function useMultiplayerGame({ joinRoomCode }: UseMultiplayerGameOptions) {
@@ -41,13 +47,97 @@ export function useMultiplayerGame({ joinRoomCode }: UseMultiplayerGameOptions) 
   const [history, setHistory] = useState<RoundRecord[]>([])
 
   const channelRef = useRef<RealtimeChannel | null>(null)
+  const phaseRef = useRef<MultiplayerPhase>('name-entry')
+  const myChoiceRef = useRef<Choice | null>(null)
+  const opponentChoiceRef = useRef<Choice | null>(null)
+  const pendingOpponentChoiceRef = useRef<{ round: number; choice: Choice } | null>(null)
+  const roundRef = useRef(1)
+  const revealTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const effectivePhase: MultiplayerPhase =
-    phase === 'finished'
-      ? 'finished'
-      : phase === 'reveal' && currentRound >= TOTAL_ROUNDS
-        ? 'finished'
-        : phase
+    phase === 'reveal' && currentRound > TOTAL_ROUNDS ? 'finished' : phase
+
+  const applyPhase = useCallback((next: MultiplayerPhase) => {
+    phaseRef.current = next
+    setPhase(next)
+  }, [])
+
+  const clearRevealTimer = useCallback(() => {
+    if (revealTimerRef.current !== null) {
+      clearTimeout(revealTimerRef.current)
+      revealTimerRef.current = null
+    }
+  }, [])
+
+  const clearRoundState = useCallback(() => {
+    clearRevealTimer()
+    myChoiceRef.current = null
+    opponentChoiceRef.current = null
+    setMyChoice(null)
+    setOpponentChoice(null)
+    setLastResult(null)
+  }, [clearRevealTimer])
+
+  const applyPendingOpponentChoice = useCallback((round: number) => {
+    const pending = pendingOpponentChoiceRef.current
+    if (!pending || pending.round !== round) return
+    pendingOpponentChoiceRef.current = null
+    opponentChoiceRef.current = pending.choice
+    setOpponentChoice(pending.choice)
+  }, [])
+
+  const scheduleAdvance = useCallback(() => {
+    clearRevealTimer()
+    revealTimerRef.current = setTimeout(() => {
+      revealTimerRef.current = null
+      if (phaseRef.current !== 'reveal') return
+      const next = roundRef.current + 1
+      roundRef.current = next
+      setCurrentRound(next)
+      myChoiceRef.current = null
+      opponentChoiceRef.current = null
+      setMyChoice(null)
+      setOpponentChoice(null)
+      setLastResult(null)
+      if (next > TOTAL_ROUNDS) {
+        applyPhase('finished')
+      } else {
+        applyPhase('choosing')
+        applyPendingOpponentChoice(next)
+      }
+    }, REVEAL_DELAY_MS)
+  }, [applyPhase, applyPendingOpponentChoice, clearRevealTimer])
+
+  const completeRound = useCallback(
+    (mine: Choice, theirs: Choice) => {
+      if (phaseRef.current !== 'choosing') return
+
+      const result = getWinner(mine, theirs)
+      setLastResult(result)
+      setScore((s) => ({
+        player: s.player + (result === 'win' ? 1 : 0),
+        opponent: s.opponent + (result === 'lose' ? 1 : 0),
+        draws: s.draws + (result === 'draw' ? 1 : 0),
+      }))
+      setHistory((h) => [
+        ...h,
+        { round: roundRef.current, playerChoice: mine, opponentChoice: theirs, result },
+      ])
+      applyPhase('reveal')
+      scheduleAdvance()
+    },
+    [applyPhase, scheduleAdvance],
+  )
+
+  const resetMatch = useCallback(() => {
+    clearRoundState()
+    pendingOpponentChoiceRef.current = null
+    roundRef.current = 1
+    setCurrentRound(1)
+    setScore({ player: 0, opponent: 0, draws: 0 })
+    setHistory([])
+    applyPhase('choosing')
+  }, [applyPhase, clearRoundState])
 
   const connect = useCallback(
     (code: string, name: string) => {
@@ -59,84 +149,54 @@ export function useMultiplayerGame({ joinRoomCode }: UseMultiplayerGameOptions) 
       }
 
       channelRef.current = channel
+      const sessionId = createSessionId()
 
       channel
         .on('broadcast', { event: BROADCAST_EVENTS.CHOICE }, ({ payload }) => {
-          const { choice } = payload as ChoicePayload
+          const { choice, round } = payload as ChoicePayload
 
+          if (round < roundRef.current) return
+
+          if (round > roundRef.current) {
+            pendingOpponentChoiceRef.current = { round, choice }
+            return
+          }
+
+          if (phaseRef.current !== 'choosing') return
+          if (opponentChoiceRef.current !== null) return
+
+          opponentChoiceRef.current = choice
           setOpponentChoice(choice)
-          setMyChoice((prev) => {
-            if (prev === null) return prev
 
-            const result = getWinner(prev, choice)
-            setLastResult(result)
-            setScore((s) => ({
-              player: s.player + (result === 'win' ? 1 : 0),
-              opponent: s.opponent + (result === 'lose' ? 1 : 0),
-              draws: s.draws + (result === 'draw' ? 1 : 0),
-            }))
-            setHistory((h) => [
-              ...h,
-              { round: h.length + 1, playerChoice: prev, opponentChoice: choice, result },
-            ])
-
-            return prev
-          })
-
-          setPhase((prev) => {
-            if (prev === 'choosing') return 'reveal'
-            return prev
-          })
-
-          setTimeout(() => {
-            setMyChoice(null)
-            setOpponentChoice(null)
-            setLastResult(null)
-            setCurrentRound((r) => {
-              const next = r + 1
-              if (next > TOTAL_ROUNDS) {
-                setPhase('finished')
-              } else {
-                setPhase('choosing')
-              }
-              return next
-            })
-          }, 2000)
+          const mine = myChoiceRef.current
+          if (mine !== null) completeRound(mine, choice)
         })
         .on('broadcast', { event: BROADCAST_EVENTS.PLAY_AGAIN }, () => {
-          setMyChoice(null)
-          setOpponentChoice(null)
-          setLastResult(null)
-          setCurrentRound(1)
-          setScore({ player: 0, opponent: 0, draws: 0 })
-          setHistory([])
-          setPhase('choosing')
+          resetMatch()
         })
         .on('presence', { event: 'sync' }, () => {
           const state = channel.presenceState<PresenceMeta>()
           const members = Object.values(state).flat()
-          const opponent = members.find((m) => m.name !== name)
+          const opponent = members.find((m) => m.id !== sessionId)
 
           if (opponent) {
             setOpponentName(opponent.name)
-            setPhase((current) => (current === 'waiting-for-opponent' ? 'choosing' : current))
-          } else {
-            setPhase((current) =>
-              current === 'choosing' || current === 'reveal' ? 'opponent-left' : current,
-            )
+            if (phaseRef.current === 'waiting-for-opponent') applyPhase('choosing')
+          } else if (phaseRef.current === 'choosing' || phaseRef.current === 'reveal') {
+            applyPhase('opponent-left')
           }
         })
         .subscribe(async (status) => {
           if (status === 'SUBSCRIBED') {
-            await channel.track({ name } satisfies PresenceMeta)
+            await channel.track({ name, id: sessionId } satisfies PresenceMeta)
           }
         })
 
       setMyName(name)
       setRoomCode(code)
-      setPhase('waiting-for-opponent')
+      applyPhase('waiting-for-opponent')
     },
-    [],
+    [applyPhase, completeRound, resetMatch],
   )
 
   const createRoom = useCallback(
@@ -157,37 +217,48 @@ export function useMultiplayerGame({ joinRoomCode }: UseMultiplayerGameOptions) 
 
   const makeChoice = useCallback(
     (choice: Choice) => {
-      if (myChoice !== null) return
+      if (phaseRef.current !== 'choosing') return
+      if (myChoiceRef.current !== null) return
 
+      myChoiceRef.current = choice
       setMyChoice(choice)
 
       channelRef.current?.send({
         type: 'broadcast',
         event: BROADCAST_EVENTS.CHOICE,
-        payload: { choice } satisfies ChoicePayload,
+        payload: { choice, round: roundRef.current } satisfies ChoicePayload,
       })
+
+      const theirs = opponentChoiceRef.current
+      if (theirs !== null) completeRound(choice, theirs)
     },
-    [myChoice],
+    [completeRound],
   )
 
   const playAgain = useCallback(() => {
-    setMyChoice(null)
-    setOpponentChoice(null)
-    setLastResult(null)
-    setCurrentRound(1)
-    setScore({ player: 0, opponent: 0, draws: 0 })
-    setHistory([])
-    setPhase('choosing')
+    if (phaseRef.current !== 'finished') return
+    resetMatch()
     channelRef.current?.send({ type: 'broadcast', event: BROADCAST_EVENTS.PLAY_AGAIN, payload: {} })
-  }, [])
+  }, [resetMatch])
 
   const leaveRoom = useCallback(() => {
     channelRef.current?.unsubscribe()
     channelRef.current = null
-  }, [])
+    clearRoundState()
+    pendingOpponentChoiceRef.current = null
+    roundRef.current = 1
+    setCurrentRound(1)
+    setScore({ player: 0, opponent: 0, draws: 0 })
+    setHistory([])
+    setMyName('')
+    setOpponentName('')
+    setRoomCode('')
+    applyPhase('name-entry')
+  }, [applyPhase, clearRoundState])
 
   useEffect(() => {
     return () => {
+      if (revealTimerRef.current !== null) clearTimeout(revealTimerRef.current)
       channelRef.current?.unsubscribe()
     }
   }, [])

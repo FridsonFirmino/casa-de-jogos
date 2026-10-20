@@ -121,7 +121,11 @@ function GameInner() {
 
             {multiplayer.phase === "choosing" && !multiplayer.myChoice && (
               <div className="flex flex-col items-center gap-6">
-                <CountdownTimer duration={5} onComplete={() => {}} />
+                <CountdownTimer
+                  key={multiplayer.currentRound}
+                  duration={5}
+                  onComplete={() => {}}
+                />
                 <div className="flex gap-4">
                   {CHOICES.map((choice) => (
                     <ChoiceButton

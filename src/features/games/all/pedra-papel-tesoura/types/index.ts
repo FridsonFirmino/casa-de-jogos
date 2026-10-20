@@ -31,8 +31,10 @@ export interface Score {
 
 export interface ChoicePayload {
   choice: Choice
+  round: number
 }
 
 export interface PresenceMeta {
   name: string
+  id: string
 }
