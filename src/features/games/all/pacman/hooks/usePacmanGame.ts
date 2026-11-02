@@ -179,6 +179,7 @@ export function usePacmanGame(): UsePacmanGameReturn {
   const start = useCallback(() => {
     if (stateRef.current.status === "playing") return;
     stateRef.current = { ...createInitialState(), status: "playing" };
+    desiredRef.current = "NONE";
     setScore(0);
     setLives(3);
     runTick();
@@ -197,6 +198,7 @@ export function usePacmanGame(): UsePacmanGameReturn {
   const handleDirection = useCallback((dir: Direction) => {
     if (stateRef.current.status === "idle") return;
     desiredRef.current = dir;
+    stateRef.current.player.desired = dir;
   }, []);
 
   const togglePause = useCallback(() => {
