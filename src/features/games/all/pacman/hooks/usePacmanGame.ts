@@ -186,7 +186,8 @@ export function usePacmanGame(): UsePacmanGameReturn {
   }, [beginPlaying, runTick]);
 
   const restart = useCallback(() => {
-    stateRef.current = createInitialState();
+    stateRef.current = { ...createInitialState(), status: "playing" };
+    desiredRef.current = "NONE";
     setScore(0);
     setLives(3);
     runTick();
