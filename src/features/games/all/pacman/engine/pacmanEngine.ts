@@ -230,7 +230,7 @@ export function stepGame(state: GameState, desired: Direction): GameState {
   if (state.status !== "playing") return state;
   const p = state.player;
 
-  if (desired !== "NONE" && (p.desired === "NONE" || !isOpposite(p.desired, desired))) {
+  if (desired !== "NONE") {
     p.desired = desired;
   }
 
